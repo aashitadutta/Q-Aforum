@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="/home/aashita/Q-Aforum/QAforum/static/css/style.css" />
+  <script src="/home/aashita/Q-Aforum/QAforum/static/js/jquery-1.11.2.js"></script>
+<script>
+$("#slideshow > div:gt(0)").hide();
+
+setInterval(function() { 
+  $('#slideshow > div:first')
+    .fadeOut(1000)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+},  3000);
+</script>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Codrops top bar -->
+            <header class="heading">
+                <span>Q-AForum</span>
+            </header>
+            <div id="wrapper">
+            <div id="login" class="animate form">
+                <form id="login_form" method="post" action="/forum/login/">
+                    <h1>Log in</h1> 
+                    {% csrf_token %}
+                    {{login_form.as_p}}
+                    <p class="login button"> 
+                        <input type="submit" value="Login" />
+                    </p>
+                    <p class="change_link">
+                        Not a member yet ?
+                        <a href="/forum/register/" class="to_register">Join us</a>
+                    </p>
+           <!--<a href="/forum/reset_password/" >Forgot password ?</a>-->
+                </form>
+<div id="slideshow">
+   <div>
+     <img src="/home/divya/Q-Aforum/QAforum/static/images/1799075.jpg">
+   </div>
+   <div>
+     <img src="/home/divya/Q-Aforum/QAforum/static/images/tokyo_panorama_dual_monitor-wide.jpg">
+   </div>
+  <div>
+     <img src="/home/divya/Q-Aforum/QAforum/static/images/water-drop-and-ripple-27198-1366x768.jpg">
+   </div>
+   
+</div>
+
+            </div>
+            </div> 
+         </div>
+    </body>
+</html>

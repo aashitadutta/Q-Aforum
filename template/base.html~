@@ -1,0 +1,39 @@
+{% load i18n %} {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="main">
+
+  <div class="header">
+<div class="menu_nav">
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="/forum/About">About Us</a></li>
+        <div class="main-nav">
+       <li><a class="cd-signin" href="#0">Post Your Question</a></li>
+         </div>
+        <!--<li><a href="/forum/qaform/">Post your Question</a></li>-->
+        <li><a href="/forum/profile/">Profile</a></li>
+        <li><a href="/forum/logout">Logout</a></li>
+       
+      </ul>
+</div>
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html" class="nobg"></a></h1></div>
+      <h1><span>Q-A Forum</span>1.0</h1>
+      <h2>By Salanshita</h2>
+</div>
+  </div>
+</div>
+ {% block content %}{% endblock %}
+</body>
+</html>

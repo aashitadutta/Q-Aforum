@@ -1,15 +1,51 @@
+{% extends 'base.html' %}
 <html>
     <head>
-        <title> Update </title>
+{% block title %}
+    
+<title> Update </title>
+{% endblock %}
+        <link rel="stylesheet" type="text/css" href="/home/aashita/Q-Aforum/template/update_profile.css" />
+</head>
+<body> 
+ {% block content %}
+        
     </head>
     
     <body>
-        <form action="/forum/update_profile/" method = "post" enctype="multipart/form-data">
+<div class="main">
+  <div class="header">
+<div class="menu_nav">
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="/forum/About">About Us</a></li>
+        <div class="main-nav">
+       <li><a class="cd-signin" href="#0">Post Your Question</a></li>
+         </div>
+        <!--<li><a href="/forum/qaform/">Post your Question</a></li>-->
+        <li><a href="/forum/profile/">Profile</a></li>
+        <li><a href="/forum/logout">Logout</a></li>
+       
+      </ul>
+</div>
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html" class="nobg"></a></h1></div>
+      <h1><span>Q-A Forum</span>1.0</h1>
+      <h2>By Salanshita</h2>
+</div>
+ </div>
+</div>
+ <!--{% block content %}-->
+            <div id="wrapper">
+            <div id="login" class="animate form">
+           <form action="/forum/update_profile/" method = "post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
         {{form1.as_p}}
-                     
-         <input type="submit" value="Update" />
+           <p class="login button"> 
+           <input type="submit" value="Update" /></p>
          </form>
+</div>
+</div>
      </body>
 </html>

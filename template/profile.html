@@ -1,21 +1,80 @@
+{% extends 'base.html' %}
 <html>
 <head>
+ {% block title %}
+    
 <title> profile </title>
+{% endblock %}
+        <link rel="stylesheet" type="text/css" href="/home/aashita/Q-Aforum/template/style1.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body>
- Name : {{username}}<br/>
- first name : {{fname}}<br/>
- last name : {{lname}}<br/>
- email: {{email}}<br/>
- Website: {{obj1.website}}</br>
- 
- 
- {% if obj1.picture %}
- <img src= "/forum{{obj1.picture.url}}" width=100 height=100/>
+<div class="main">
+  <div class="header">
+<div class="menu_nav">
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="/forum/About">About Us</a></li>
+        <div class="main-nav">
+       <li><a class="cd-signin" href="#0">Post Your Question</a></li>
+         </div>
+        <!--<li><a href="/forum/qaform/">Post your Question</a></li>-->
+        <li><a href="/forum/profile/">Profile</a></li>
+        <li><a href="/forum/logout">Logout</a></li>
+       
+      </ul>
+</div>
+    <div class="header_resize">
+      <div class="logo"><h1><a href="index.html" class="nobg"></a></h1></div>
+      <h1><span>Q-A Forum</span>1.0</h1>
+      <h2>By Salanshita</h2>
+</div>
+  </div>
+
+ <!--{% block content %}-->
+
+<section>
+
+<h2 class="heading section-title">
+About.
+<span class="Note">Details about {{username}}</span>
+</h2>
+<hr>
+<div class="Column1">
+
+    <div class="userInfo">
+         {% if obj1.picture %}
+ <img src= "/forum{{obj1.picture.url}}" width=150 height=150/>
  {% endif %}
- 
- <a href="/forum/changepwd"> Change password </a>
- <a href="/forum/update_profile"> Edit Profile</a>
+        <h1 class="Title4a username"></h1>
+</div>
+<div class="Column2">
+<div class="aboutUser">
+
+<table>
+<tbody>
+<tr>
+<td>
+ Name:</td>  <td>{{username}}</td></tr>
+<tr> <td>first name:</td>  <td>{{fname}}</td></tr>
+ <tr><td>last name:</td>  <td>{{lname}}</td></tr>
+<tr> <td>email:</td> <td>{{email}}</td></tr>
+<tr> <td>Website:</td> <td>{{obj1.website}}</td></tr>
+</tbody>
+</table>
+</div> 
+</div>
+</section>
+<div class="Column3">
+<section class="gradient">
+ <button><a href="/forum/changepwd"> Change password </a></button>
+<button> <a href="/forum/update_profile"> Edit Profile</a></button>
+
+</section>
+</div>
+{% endblock %}
 </body>
 </html>
  

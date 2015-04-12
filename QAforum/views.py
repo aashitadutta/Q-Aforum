@@ -13,6 +13,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 #def register(request):
@@ -211,21 +212,37 @@ def home(request):
     
     question = Question.objects.aggregate(Max('id'))
     a = question['id__max']
+    
+    paginator = Paginator(question, 10) # Show 25 contacts per page
+
+    page = request.GET.get('page')
     questlist = []
+    answerlist=[]
     extra = []
-    for i in range(5):
+    for i in range(a):
         q = Question.objects.get(id=(a-i))
-        extra.append(UserProfile.objects.get(user_id = q.user_id_id))
+        '''extra.append(UserProfile.objects.get(user_id = q.user_id_id))'''
+        ans=Answer.objects.filter(question_id_id=q.id).aggregate(Max('id'))
+        an = ans['id__max']
+        if(an>1):
+            
+        
+            eas = Answer.objects.get(id=an)
+       	    answerlist.append(eas)
+        else:
+            answerlist.append('Be the First one to Answer')
         questlist.append(q)
-        final = zip(questlist,extra)
-    return render(request,'home.html',{'final':final})
+    final = zip(questlist,answerlist)
+    obj = User.objects.get(username=request.user.username)
+    obj1 = UserProfile.objects.get(user=obj)
+    return render(request,'home.html',{'l':questlist, 'a': answerlist,'f':final,'p':obj1})
 
 def display(request):
     return render(request,'post.html')
     
 def question(request):
     if 'postt' in request.GET:
-        quest = request.GET['quest']
+        quest = request.GET['postt']
         
         user_id= request.user.id
         user = User.objects.get(id = user_id)
@@ -233,5 +250,31 @@ def question(request):
         date_updated = datetime.datetime.now()
         obj = Question(title=quest,user_id=user,date_created=date_created,date_update=date_updated)
         obj.save()
-        return HttpResponse("success")
+        return HttpResponseRedirect("/forum/home")
+
+def writeans(request,ques_id):
+    quest=Question.objects.get(id=ques_id)
+    
+    anss = Answer.objects.filter(question_id_id=ques_id)
+    return render(request,'ans.html',{'q':quest,'a':anss})
+    
+def answer(request,ques_id):
+    if 'ans' in request.GET:
+        answer = request.GET['answer']
+        ques_obj=Question.objects.get(id=ques_id)
+        user_id= request.user.id
+      
+        user = User.objects.get(id = user_id)
+        obj = Answer(answer_text=answer,user_id=user,question_id_id=ques_id)
+        obj.save()
+        
+        quest=Question.objects.get(id=ques_id)
+        anss = Answer.objects.filter(question_id_id=ques_id)
+        return render(request,'after.html',{'q':quest, 'a':anss})
+        
+        
+        
+        
+           
+
         
